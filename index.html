@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK Digital Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#101126;color:white}
+header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;background:#191a36}
+.logo{font-size:25px;font-weight:bold;color:#a995ff}
+nav a{color:white;text-decoration:none;margin:12px}
+button{padding:12px 20px;border:0;border-radius:9px;background:#7958ed;color:white;cursor:pointer}
+.hero{text-align:center;padding:100px 20px;background:linear-gradient(130deg,#191a36,#49318b)}
+.hero h1{font-size:48px}
+.hero p{color:#d4d1e8;font-size:18px}
+section{padding:55px 8%;text-align:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{padding:30px;background:#20213e;border-radius:15px}
+.card h2{color:#a995ff}
+input{display:block;padding:13px;margin:10px auto;width:90%;max-width:350px;border-radius:8px;border:0}
+footer{text-align:center;padding:25px;background:#191a36}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">MK DIGITAL HUB</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#academy">Academy</a>
+<a href="#market">Market</a>
+</nav>
+<button onclick="login()">Login</button>
+</header>
+
+<div class="hero" id="home">
+<h1>Welcome to MK Digital Hub</h1>
+<p>Learn • Create • Grow</p>
+<button onclick="document.getElementById('services').scrollIntoView()">Explore Platform</button>
+</div>
+
+<section id="services">
+<h1>Our Digital Services</h1>
+<div class="cards">
+<div class="card"><h2>AI Studio</h2><p>Artificial Intelligence tools and innovation.</p></div>
+<div class="card" id="market"><h2>Digital Market</h2><p>Digital products and online services.</p></div>
+<div class="card" id="academy"><h2>MK Academy</h2><p>Learn new skills and develop your future.</p></div>
+</div>
+</section>
+
+<section>
+<h1>Join MK Digital Hub</h1>
+<input id="username" placeholder="Your name">
+<input id="email" type="email" placeholder="Your email">
+<button onclick="register()">Register</button>
+<p id="message"></p>
+</section>
+
+<footer>© 2026 MK Digital Hub | All rights reserved</footer>
+
+<script>
+function register(){
+let name=document.getElementById('username').value;
+let email=document.getElementById('email').value;
+if(!name||!email){alert('Fill in all fields');return;}
+localStorage.setItem('mk_user',name);
+document.getElementById('message').innerText='Welcome '+name+'!';
+}
+function login(){
+let user=localStorage.getItem('mk_user');
+alert(user?'Welcome back '+user:'Please register first!');
+}
+</script>
+</body>
+</html>

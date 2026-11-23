@@ -6,72 +6,152 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MK Digital Hub</title>
 <style>
+:root{--bg:#080d19;--panel:#111b2d;--text:#f4f7ff;--muted:#a8b4c9;--blue:#5b8cff;--cyan:#36d6d0}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#101126;color:white}
-header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;background:#191a36}
-.logo{font-size:25px;font-weight:bold;color:#a995ff}
-nav a{color:white;text-decoration:none;margin:12px}
-button{padding:12px 20px;border:0;border-radius:9px;background:#7958ed;color:white;cursor:pointer}
-.hero{text-align:center;padding:100px 20px;background:linear-gradient(130deg,#191a36,#49318b)}
-.hero h1{font-size:48px}
-.hero p{color:#d4d1e8;font-size:18px}
-section{padding:55px 8%;text-align:center}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{padding:30px;background:#20213e;border-radius:15px}
-.card h2{color:#a995ff}
-input{display:block;padding:13px;margin:10px auto;width:90%;max-width:350px;border-radius:8px;border:0}
-footer{text-align:center;padding:25px;background:#191a36}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 7%;border-bottom:1px solid #26344c;position:sticky;top:0;background:#080d19ed;z-index:5}
+.logo{font-size:23px;font-weight:bold;color:var(--cyan)}
+nav{display:flex;gap:20px;align-items:center}
+a{color:var(--text);text-decoration:none}
+a:hover{color:var(--cyan)}
+button,select{padding:11px 16px;border:0;border-radius:9px;cursor:pointer;font-weight:bold}
+button{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#07101e}
+select{background:var(--panel);color:white;border:1px solid #34445e}
+.hero{text-align:center;padding:100px 20px 80px;background:radial-gradient(ellipse at top,#18335d 0%,transparent 65%)}
+.hero h1{font-size:clamp(38px,7vw,68px);margin:0 0 18px}
+.hero h1 span{color:var(--cyan)}
+.hero p{color:var(--muted);font-size:18px;line-height:1.7;max-width:650px;margin:0 auto 28px}
+section{padding:65px 7%}
+.section-title{text-align:center;font-size:32px;margin-bottom:12px}
+.section-desc{text-align:center;color:var(--muted);margin-bottom:35px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid #263750;border-radius:17px;padding:27px;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:var(--cyan)}
+.card .emoji{font-size:35px}
+.card h3{font-size:22px}
+.card p{color:var(--muted);line-height:1.6}
+.card a{display:inline-block;margin-top:10px;color:var(--cyan)}
+.about{background:#0d1627}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;text-align:center}
+.stat{background:var(--panel);padding:25px;border-radius:14px}
+.stat strong{font-size:30px;color:var(--cyan);display:block}
+form{max-width:440px;margin:25px auto;background:var(--panel);padding:25px;border-radius:16px}
+input{width:100%;padding:13px;margin:9px 0;background:#081222;border:1px solid #34445e;border-radius:8px;color:white}
+form button{width:100%;margin-top:10px}
+#message{text-align:center;color:var(--cyan);min-height:24px}
+footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid #26344c}
+.menu-btn{display:none}
+@media(max-width:700px){
+ header{padding:15px 5%;flex-wrap:wrap}
+ nav{width:100%;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:15px}
+ .hero{padding:70px 18px}
+ section{padding:50px 5%}
+}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">MK DIGITAL HUB</div>
-<nav>
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#academy">Academy</a>
-<a href="#market">Market</a>
-</nav>
-<button onclick="login()">Login</button>
+ <div class="logo">MK DIGITAL HUB</div>
+ <nav>
+  <a href="#home" data-uz="Bosh sahifa" data-en="Home" data-ru="Главная">Bosh sahifa</a>
+  <a href="#services" data-uz="Xizmatlar" data-en="Services" data-ru="Услуги">Xizmatlar</a>
+  <a href="#about" data-uz="Biz haqimizda" data-en="About" data-ru="О нас">Biz haqimizda</a>
+  <a href="#register" data-uz="A'zo bo'lish" data-en="Join" data-ru="Регистрация">A'zo bo'lish</a>
+  <select id="language" aria-label="Language">
+   <option value="uz">UZ</option>
+   <option value="en">EN</option>
+   <option value="ru">RU</option>
+  </select>
+ </nav>
 </header>
 
-<div class="hero" id="home">
-<h1>Welcome to MK Digital Hub</h1>
-<p>Learn • Create • Grow</p>
-<button onclick="document.getElementById('services').scrollIntoView()">Explore Platform</button>
-</div>
+<main>
+<section class="hero" id="home">
+ <h1>Welcome to <span>MK Digital Hub</span></h1>
+ <p data-uz="Raqamli kelajak sari birgalikda. O‘rganing, yarating va rivojlaning!" data-en="Together towards a digital future. Learn, create and grow!" data-ru="Вместе к цифровому будущему. Учитесь, создавайте и развивайтесь!">Raqamli kelajak sari birgalikda. O‘rganing, yarating va rivojlaning!</p>
+ <a href="#services"><button data-uz="Boshlash" data-en="Get Started" data-ru="Начать">Boshlash</button></a>
+</section>
 
 <section id="services">
-<h1>Our Digital Services</h1>
-<div class="cards">
-<div class="card"><h2>AI Studio</h2><p>Artificial Intelligence tools and innovation.</p></div>
-<div class="card" id="market"><h2>Digital Market</h2><p>Digital products and online services.</p></div>
-<div class="card" id="academy"><h2>MK Academy</h2><p>Learn new skills and develop your future.</p></div>
-</div>
+ <h2 class="section-title" data-uz="Bizning platformamiz" data-en="Our Platform" data-ru="Наша платформа">Bizning platformamiz</h2>
+ <p class="section-desc" data-uz="Barcha raqamli imkoniyatlar bir joyda." data-en="All digital opportunities in one place." data-ru="Все цифровые возможности в одном месте.">Barcha raqamli imkoniyatlar bir joyda.</p>
+ <div class="cards">
+  <article class="card">
+   <div class="emoji">🤖</div>
+   <h3>AI Studio</h3>
+   <p data-uz="Sun'iy intellekt olamini o‘rganing va yangi g‘oyalar yarating." data-en="Explore artificial intelligence and create new ideas." data-ru="Изучайте искусственный интеллект и создавайте новые идеи.">Sun'iy intellekt olamini o‘rganing va yangi g‘oyalar yarating.</p>
+   <a href="#register" data-uz="Batafsil →" data-en="Explore →" data-ru="Подробнее →">Batafsil →</a>
+  </article>
+  <article class="card">
+   <div class="emoji">🛒</div>
+   <h3>Digital Market</h3>
+   <p data-uz="Raqamli mahsulotlar va foydali resurslar uchun maydon." data-en="A place for digital products and useful resources." data-ru="Площадка цифровых продуктов и полезных ресурсов.">Raqamli mahsulotlar va foydali resurslar uchun maydon.</p>
+   <a href="#register" data-uz="Batafsil →" data-en="Explore →" data-ru="Подробнее →">Batafsil →</a>
+  </article>
+  <article class="card">
+   <div class="emoji">🎓</div>
+   <h3>MK Academy</h3>
+   <p data-uz="Bilim oling, yangi ko‘nikmalarni rivojlantiring." data-en="Learn and develop new skills." data-ru="Получайте знания и развивайте навыки.">Bilim oling, yangi ko‘nikmalarni rivojlantiring.</p>
+   <a href="#register" data-uz="Batafsil →" data-en="Explore →" data-ru="Подробнее →">Batafsil →</a>
+  </article>
+ </div>
 </section>
 
-<section>
-<h1>Join MK Digital Hub</h1>
-<input id="username" placeholder="Your name">
-<input id="email" type="email" placeholder="Your email">
-<button onclick="register()">Register</button>
-<p id="message"></p>
+<section class="about" id="about">
+ <h2 class="section-title" data-uz="MK Digital Hub haqida" data-en="About MK Digital Hub" data-ru="О MK Digital Hub">MK Digital Hub haqida</h2>
+ <p class="section-desc" data-uz="Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish." data-en="Our mission is to bring knowledge, technology and creativity together." data-ru="Наша цель — объединить знания, технологии и творчество.">Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish.</p>
+ <div class="stats">
+  <div class="stat"><strong>3</strong><span data-uz="Asosiy yo‘nalish" data-en="Main sections" data-ru="Основных направления">Asosiy yo‘nalish</span></div>
+  <div class="stat"><strong>3</strong><span data-uz="Til" data-en="Languages" data-ru="Языка">Til</span></div>
+  <div class="stat"><strong>24/7</strong><span data-uz="Onlayn foydalanish" data-en="Online access" data-ru="Онлайн-доступ">Onlayn foydalanish</span></div>
+ </div>
 </section>
 
-<footer>© 2026 MK Digital Hub | All rights reserved</footer>
+<section id="register">
+ <h2 class="section-title" data-uz="MK Digital Hub'ga qo‘shiling" data-en="Join MK Digital Hub" data-ru="Присоединяйтесь к MK Digital Hub">MK Digital Hub'ga qo‘shiling</h2>
+ <p class="section-desc" data-uz="Ro‘yxatdan o‘tish formasini to‘ldiring." data-en="Complete the registration form." data-ru="Заполните форму регистрации.">Ro‘yxatdan o‘tish formasini to‘ldiring.</p>
+ <form id="joinForm">
+  <input id="name" type="text" placeholder="Ismingiz" required>
+  <input id="email" type="email" placeholder="Email manzilingiz" required>
+  <button type="submit" data-uz="Ro‘yxatdan o‘tish" data-en="Register" data-ru="Зарегистрироваться">Ro‘yxatdan o‘tish</button>
+  <p id="message"></p>
+ </form>
+</section>
+</main>
+
+<footer>© 2026 MK Digital Hub. All rights reserved.</footer>
 
 <script>
-function register(){
-let name=document.getElementById('username').value;
-let email=document.getElementById('email').value;
-if(!name||!email){alert('Fill in all fields');return;}
-localStorage.setItem('mk_user',name);
-document.getElementById('message').innerText='Welcome '+name+'!';
+const language=document.getElementById('language');
+function translate(lang){
+ document.documentElement.lang=lang;
+ document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+  el.textContent=el.getAttribute('data-'+lang);
+ });
+ document.getElementById('name').placeholder=
+  ({uz:'Ismingiz',en:'Your name',ru:'Ваше имя'})[lang];
+ document.getElementById('email').placeholder=
+  ({uz:'Email manzilingiz',en:'Your email',ru:'Ваш email'})[lang];
 }
-function login(){
-let user=localStorage.getItem('mk_user');
-alert(user?'Welcome back '+user:'Please register first!');
-}
+language.addEventListener('change',()=>translate(language.value));
+
+document.getElementById('joinForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const name=document.getElementById('name').value.trim();
+ const email=document.getElementById('email').value.trim();
+ if(!name||!email)return;
+ const users=JSON.parse(localStorage.getItem('mk_demo_users')||'[]');
+ if(users.some(user=>user.email===email)){
+  document.getElementById('message').textContent=
+   ({uz:'Bu email avval ro‘yxatdan o‘tgan.',en:'This email is already registered.',ru:'Этот email уже зарегистрирован.'})[language.value];
+  return;
+ }
+ users.push({name,email});
+ localStorage.setItem('mk_demo_users',JSON.stringify(users));
+ document.getElementById('message').textContent=
+  ({uz:'Rahmat! Demo ro‘yxatdan o‘tish yakunlandi.',en:'Thank you! Demo registration completed.',ru:'Спасибо! Деморегистрация завершена.'})[language.value];
+ this.reset();
+});
 </script>
 </body>
 </html>

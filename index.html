@@ -6,152 +6,523 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MK Digital Hub</title>
 <style>
-:root{--bg:#080d19;--panel:#111b2d;--text:#f4f7ff;--muted:#a8b4c9;--blue:#5b8cff;--cyan:#36d6d0}
+:root {
+  --bg:#080d19;
+  --panel:#111b2d;
+  --text:#f4f7ff;
+  --muted:#a8b4c9;
+  --blue:#5b8cff;
+  --cyan:#36d6d0;
+  --border:#263750;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 7%;border-bottom:1px solid #26344c;position:sticky;top:0;background:#080d19ed;z-index:5}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  padding:18px 7%;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  background:#080d19f2;
+  z-index:10;
+}
 .logo{font-size:23px;font-weight:bold;color:var(--cyan)}
-nav{display:flex;gap:20px;align-items:center}
+nav{display:flex;gap:17px;align-items:center;flex-wrap:wrap}
 a{color:var(--text);text-decoration:none}
 a:hover{color:var(--cyan)}
-button,select{padding:11px 16px;border:0;border-radius:9px;cursor:pointer;font-weight:bold}
-button{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#07101e}
-select{background:var(--panel);color:white;border:1px solid #34445e}
-.hero{text-align:center;padding:100px 20px 80px;background:radial-gradient(ellipse at top,#18335d 0%,transparent 65%)}
-.hero h1{font-size:clamp(38px,7vw,68px);margin:0 0 18px}
+button,select{
+  padding:12px 16px;
+  border:0;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+}
+button{
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  color:#07101e;
+}
+button:hover{opacity:.88}
+select{
+  background:var(--panel);
+  color:white;
+  border:1px solid var(--border);
+}
+.hero{
+  text-align:center;
+  padding:100px 20px 85px;
+  background:radial-gradient(ellipse at top,#18335d 0%,transparent 65%);
+}
+.hero h1{font-size:clamp(36px,7vw,68px);margin:0 0 18px}
 .hero h1 span{color:var(--cyan)}
-.hero p{color:var(--muted);font-size:18px;line-height:1.7;max-width:650px;margin:0 auto 28px}
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.7;
+  max-width:650px;
+  margin:0 auto 28px;
+}
 section{padding:65px 7%}
-.section-title{text-align:center;font-size:32px;margin-bottom:12px}
+.section-title{text-align:center;font-size:32px}
 .section-desc{text-align:center;color:var(--muted);margin-bottom:35px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.card{background:var(--panel);border:1px solid #263750;border-radius:17px;padding:27px;transition:.25s}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:27px;
+  transition:.25s;
+}
 .card:hover{transform:translateY(-5px);border-color:var(--cyan)}
-.card .emoji{font-size:35px}
+.emoji{font-size:35px}
 .card h3{font-size:22px}
 .card p{color:var(--muted);line-height:1.6}
-.card a{display:inline-block;margin-top:10px;color:var(--cyan)}
 .about{background:#0d1627}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;text-align:center}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  text-align:center;
+}
 .stat{background:var(--panel);padding:25px;border-radius:14px}
 .stat strong{font-size:30px;color:var(--cyan);display:block}
-form{max-width:440px;margin:25px auto;background:var(--panel);padding:25px;border-radius:16px}
-input{width:100%;padding:13px;margin:9px 0;background:#081222;border:1px solid #34445e;border-radius:8px;color:white}
-form button{width:100%;margin-top:10px}
-#message{text-align:center;color:var(--cyan);min-height:24px}
-footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid #26344c}
-.menu-btn{display:none}
+.auth-box{
+  max-width:460px;
+  margin:25px auto;
+  background:var(--panel);
+  padding:28px;
+  border-radius:17px;
+  border:1px solid var(--border);
+}
+input{
+  width:100%;
+  padding:14px;
+  margin:9px 0;
+  background:#081222;
+  border:1px solid #34445e;
+  border-radius:8px;
+  color:white;
+}
+.auth-box button{width:100%;margin-top:12px}
+.switch{
+  background:transparent;
+  color:var(--cyan);
+  border:1px solid var(--cyan);
+  margin-top:12px;
+}
+.message{
+  text-align:center;
+  color:var(--cyan);
+  min-height:24px;
+  overflow-wrap:anywhere;
+}
+.hidden{display:none!important}
+.dashboard{
+  max-width:900px;
+  margin:25px auto;
+  padding:25px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+}
+.user-row{
+  padding:13px;
+  border-bottom:1px solid var(--border);
+  overflow-wrap:anywhere;
+}
+footer{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+}
 @media(max-width:700px){
- header{padding:15px 5%;flex-wrap:wrap}
- nav{width:100%;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:15px}
- .hero{padding:70px 18px}
- section{padding:50px 5%}
+  header{padding:15px 5%;gap:15px}
+  nav{gap:12px}
+  section{padding:50px 5%}
+  .hero{padding:70px 18px}
 }
 </style>
 </head>
 <body>
+
 <header>
- <div class="logo">MK DIGITAL HUB</div>
- <nav>
-  <a href="#home" data-uz="Bosh sahifa" data-en="Home" data-ru="Главная">Bosh sahifa</a>
-  <a href="#services" data-uz="Xizmatlar" data-en="Services" data-ru="Услуги">Xizmatlar</a>
-  <a href="#about" data-uz="Biz haqimizda" data-en="About" data-ru="О нас">Biz haqimizda</a>
-  <a href="#register" data-uz="A'zo bo'lish" data-en="Join" data-ru="Регистрация">A'zo bo'lish</a>
-  <select id="language" aria-label="Language">
-   <option value="uz">UZ</option>
-   <option value="en">EN</option>
-   <option value="ru">RU</option>
-  </select>
- </nav>
+  <div class="logo">MK DIGITAL HUB</div>
+  <nav>
+    <a href="#home" data-uz="Bosh sahifa" data-en="Home" data-ru="Главная">Bosh sahifa</a>
+    <a href="#services" data-uz="Xizmatlar" data-en="Services" data-ru="Услуги">Xizmatlar</a>
+    <a href="#about" data-uz="Biz haqimizda" data-en="About" data-ru="О нас">Biz haqimizda</a>
+    <a href="#account" data-uz="Hisob" data-en="Account" data-ru="Аккаунт">Hisob</a>
+    <select id="language">
+      <option value="uz">UZ</option>
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
+  </nav>
 </header>
 
 <main>
 <section class="hero" id="home">
- <h1>Welcome to <span>MK Digital Hub</span></h1>
- <p data-uz="Raqamli kelajak sari birgalikda. O‘rganing, yarating va rivojlaning!" data-en="Together towards a digital future. Learn, create and grow!" data-ru="Вместе к цифровому будущему. Учитесь, создавайте и развивайтесь!">Raqamli kelajak sari birgalikda. O‘rganing, yarating va rivojlaning!</p>
- <a href="#services"><button data-uz="Boshlash" data-en="Get Started" data-ru="Начать">Boshlash</button></a>
+  <h1>Welcome to <span>MK Digital Hub</span></h1>
+  <p data-uz="Raqamli kelajak sari birgalikda. O‘rganing, yarating va rivojlaning!"
+     data-en="Together towards a digital future. Learn, create and grow!"
+     data-ru="Вместе к цифровому будущему. Учитесь, создавайте и развивайтесь!">
+    Raqamli kelajak sari birgalikda. O‘rganing, yarating va rivojlaning!
+  </p>
+  <a href="#services">
+    <button data-uz="Boshlash" data-en="Get Started" data-ru="Начать">Boshlash</button>
+  </a>
 </section>
 
 <section id="services">
- <h2 class="section-title" data-uz="Bizning platformamiz" data-en="Our Platform" data-ru="Наша платформа">Bizning platformamiz</h2>
- <p class="section-desc" data-uz="Barcha raqamli imkoniyatlar bir joyda." data-en="All digital opportunities in one place." data-ru="Все цифровые возможности в одном месте.">Barcha raqamli imkoniyatlar bir joyda.</p>
- <div class="cards">
-  <article class="card">
-   <div class="emoji">🤖</div>
-   <h3>AI Studio</h3>
-   <p data-uz="Sun'iy intellekt olamini o‘rganing va yangi g‘oyalar yarating." data-en="Explore artificial intelligence and create new ideas." data-ru="Изучайте искусственный интеллект и создавайте новые идеи.">Sun'iy intellekt olamini o‘rganing va yangi g‘oyalar yarating.</p>
-   <a href="#register" data-uz="Batafsil →" data-en="Explore →" data-ru="Подробнее →">Batafsil →</a>
-  </article>
-  <article class="card">
-   <div class="emoji">🛒</div>
-   <h3>Digital Market</h3>
-   <p data-uz="Raqamli mahsulotlar va foydali resurslar uchun maydon." data-en="A place for digital products and useful resources." data-ru="Площадка цифровых продуктов и полезных ресурсов.">Raqamli mahsulotlar va foydali resurslar uchun maydon.</p>
-   <a href="#register" data-uz="Batafsil →" data-en="Explore →" data-ru="Подробнее →">Batafsil →</a>
-  </article>
-  <article class="card">
-   <div class="emoji">🎓</div>
-   <h3>MK Academy</h3>
-   <p data-uz="Bilim oling, yangi ko‘nikmalarni rivojlantiring." data-en="Learn and develop new skills." data-ru="Получайте знания и развивайте навыки.">Bilim oling, yangi ko‘nikmalarni rivojlantiring.</p>
-   <a href="#register" data-uz="Batafsil →" data-en="Explore →" data-ru="Подробнее →">Batafsil →</a>
-  </article>
- </div>
+  <h2 class="section-title" data-uz="Bizning platformamiz" data-en="Our Platform" data-ru="Наша платформа">Bizning platformamiz</h2>
+  <p class="section-desc" data-uz="Barcha raqamli imkoniyatlar bir joyda."
+     data-en="All digital opportunities in one place."
+     data-ru="Все цифровые возможности в одном месте.">
+    Barcha raqamli imkoniyatlar bir joyda.
+  </p>
+
+  <div class="cards">
+    <article class="card">
+      <div class="emoji">🤖</div>
+      <h3>AI Studio</h3>
+      <p data-uz="Sun'iy intellekt olamini o‘rganing va yangi g‘oyalar yarating."
+         data-en="Explore artificial intelligence and create new ideas."
+         data-ru="Изучайте искусственный интеллект и создавайте новые идеи.">
+        Sun'iy intellekt olamini o‘rganing va yangi g‘oyalar yarating.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🛒</div>
+      <h3>Digital Market</h3>
+      <p data-uz="Raqamli mahsulotlar va foydali resurslar uchun maydon."
+         data-en="A place for digital products and useful resources."
+         data-ru="Площадка цифровых продуктов и полезных ресурсов.">
+        Raqamli mahsulotlar va foydali resurslar uchun maydon.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🎓</div>
+      <h3>MK Academy</h3>
+      <p data-uz="Bilim oling, yangi ko‘nikmalarni rivojlantiring."
+         data-en="Learn and develop new skills."
+         data-ru="Получайте знания и развивайте навыки.">
+        Bilim oling, yangi ko‘nikmalarni rivojlantiring.
+      </p>
+    </article>
+  </div>
 </section>
 
 <section class="about" id="about">
- <h2 class="section-title" data-uz="MK Digital Hub haqida" data-en="About MK Digital Hub" data-ru="О MK Digital Hub">MK Digital Hub haqida</h2>
- <p class="section-desc" data-uz="Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish." data-en="Our mission is to bring knowledge, technology and creativity together." data-ru="Наша цель — объединить знания, технологии и творчество.">Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish.</p>
- <div class="stats">
-  <div class="stat"><strong>3</strong><span data-uz="Asosiy yo‘nalish" data-en="Main sections" data-ru="Основных направления">Asosiy yo‘nalish</span></div>
-  <div class="stat"><strong>3</strong><span data-uz="Til" data-en="Languages" data-ru="Языка">Til</span></div>
-  <div class="stat"><strong>24/7</strong><span data-uz="Onlayn foydalanish" data-en="Online access" data-ru="Онлайн-доступ">Onlayn foydalanish</span></div>
- </div>
+  <h2 class="section-title" data-uz="MK Digital Hub haqida"
+      data-en="About MK Digital Hub"
+      data-ru="О MK Digital Hub">MK Digital Hub haqida</h2>
+  <p class="section-desc"
+     data-uz="Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish."
+     data-en="Our mission is to bring knowledge, technology and creativity together."
+     data-ru="Наша цель — объединить знания, технологии и творчество.">
+    Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish.
+  </p>
+  <div class="stats">
+    <div class="stat"><strong>3</strong><span>Platforma yo‘nalishi</span></div>
+    <div class="stat"><strong>3</strong><span>Til</span></div>
+    <div class="stat"><strong>24/7</strong><span>Online</span></div>
+  </div>
 </section>
 
-<section id="register">
- <h2 class="section-title" data-uz="MK Digital Hub'ga qo‘shiling" data-en="Join MK Digital Hub" data-ru="Присоединяйтесь к MK Digital Hub">MK Digital Hub'ga qo‘shiling</h2>
- <p class="section-desc" data-uz="Ro‘yxatdan o‘tish formasini to‘ldiring." data-en="Complete the registration form." data-ru="Заполните форму регистрации.">Ro‘yxatdan o‘tish formasini to‘ldiring.</p>
- <form id="joinForm">
-  <input id="name" type="text" placeholder="Ismingiz" required>
-  <input id="email" type="email" placeholder="Email manzilingiz" required>
-  <button type="submit" data-uz="Ro‘yxatdan o‘tish" data-en="Register" data-ru="Зарегистрироваться">Ro‘yxatdan o‘tish</button>
-  <p id="message"></p>
- </form>
+<section id="account">
+  <h2 class="section-title" data-uz="Foydalanuvchi hisobi"
+      data-en="User Account" data-ru="Аккаунт пользователя">
+    Foydalanuvchi hisobi
+  </h2>
+
+  <div class="auth-box" id="authBox">
+    <h3 id="formTitle">Ro‘yxatdan o‘tish</h3>
+
+    <form id="authForm">
+      <input id="name" type="text" placeholder="Ismingiz" required>
+      <input id="email" type="email" placeholder="Email manzilingiz" required>
+      <input id="password" type="password"
+        placeholder="Parol (kamida 6 ta belgi)"
+        minlength="6" required>
+      <button id="submitButton" type="submit">Ro‘yxatdan o‘tish</button>
+    </form>
+
+    <button class="switch" id="switchMode" type="button">
+      Hisobingiz bormi? Kirish
+    </button>
+    <p class="message" id="message"></p>
+  </div>
+
+  <div class="dashboard hidden" id="userPanel">
+    <h3 id="welcome">Hisobingizga xush kelibsiz!</h3>
+    <p id="userEmail"></p>
+    <button id="logoutButton" data-uz="Chiqish" data-en="Sign out" data-ru="Выйти">Chiqish</button>
+  </div>
+
+  <div class="dashboard hidden" id="adminPanel">
+    <h2>MK Admin Panel</h2>
+    <p>Foydalanuvchilar boshqaruvi</p>
+    <div id="userList">Yuklanmoqda...</div>
+  </div>
 </section>
 </main>
 
 <footer>© 2026 MK Digital Hub. All rights reserved.</footer>
 
-<script>
-const language=document.getElementById('language');
-function translate(lang){
- document.documentElement.lang=lang;
- document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-  el.textContent=el.getAttribute('data-'+lang);
- });
- document.getElementById('name').placeholder=
-  ({uz:'Ismingiz',en:'Your name',ru:'Ваше имя'})[lang];
- document.getElementById('email').placeholder=
-  ({uz:'Email manzilingiz',en:'Your email',ru:'Ваш email'})[lang];
-}
-language.addEventListener('change',()=>translate(language.value));
+<script type="module">
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 
-document.getElementById('joinForm').addEventListener('submit',function(e){
- e.preventDefault();
- const name=document.getElementById('name').value.trim();
- const email=document.getElementById('email').value.trim();
- if(!name||!email)return;
- const users=JSON.parse(localStorage.getItem('mk_demo_users')||'[]');
- if(users.some(user=>user.email===email)){
-  document.getElementById('message').textContent=
-   ({uz:'Bu email avval ro‘yxatdan o‘tgan.',en:'This email is already registered.',ru:'Этот email уже зарегистрирован.'})[language.value];
-  return;
- }
- users.push({name,email});
- localStorage.setItem('mk_demo_users',JSON.stringify(users));
- document.getElementById('message').textContent=
-  ({uz:'Rahmat! Demo ro‘yxatdan o‘tish yakunlandi.',en:'Thank you! Demo registration completed.',ru:'Спасибо! Деморегистрация завершена.'})[language.value];
- this.reset();
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  getIdTokenResult
+} from
+"https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDocs,
+  collection,
+  serverTimestamp
+} from
+"https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+// Firebase konfiguratsiyasi
+const firebaseConfig = {
+  apiKey: "BU_YERGA_FIREBASE_API_KEY",
+  authDomain: "mk-digital-hub-62938.firebaseapp.com",
+  projectId: "mk-digital-hub-62938",
+  storageBucket: "mk-digital-hub-62938.firebasestorage.app",
+  messagingSenderId: "481588336096",
+  appId: "1:481588336096:web:773511eda58fb73a810785",
+  measurementId: "G-3CN65EMKMC"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let mode = "register";
+let currentLanguage = "uz";
+
+const $ = id => document.getElementById(id);
+
+const translations = {
+  uz: {
+    register:"Ro‘yxatdan o‘tish",
+    login:"Kirish",
+    have:"Hisobingiz bormi? Kirish",
+    noAccount:"Hisobingiz yo‘qmi? Ro‘yxatdan o‘tish",
+    name:"Ismingiz",
+    email:"Email manzilingiz",
+    password:"Parol (kamida 6 ta belgi)",
+    success:"Ro‘yxatdan o‘tish muvaffaqiyatli!",
+    logged:"Tizimga muvaffaqiyatli kirdingiz!",
+    loading:"Kuting...",
+    logout:"Chiqish",
+    error:"Xatolik: ",
+    welcome:"Hisobingizga xush kelibsiz!",
+    admin:"Admin panel",
+    noUsers:"Foydalanuvchilar topilmadi."
+  },
+  en: {
+    register:"Register",
+    login:"Login",
+    have:"Already have an account? Login",
+    noAccount:"No account? Register",
+    name:"Your name",
+    email:"Your email",
+    password:"Password (at least 6 characters)",
+    success:"Registration successful!",
+    logged:"You have successfully logged in!",
+    loading:"Please wait...",
+    logout:"Sign out",
+    error:"Error: ",
+    welcome:"Welcome to your account!",
+    admin:"Admin panel",
+    noUsers:"No users found."
+  },
+  ru: {
+    register:"Регистрация",
+    login:"Войти",
+    have:"Уже есть аккаунт? Войти",
+    noAccount:"Нет аккаунта? Зарегистрироваться",
+    name:"Ваше имя",
+    email:"Ваш email",
+    password:"Пароль (не менее 6 символов)",
+    success:"Регистрация прошла успешно!",
+    logged:"Вы успешно вошли!",
+    loading:"Подождите...",
+    logout:"Выйти",
+    error:"Ошибка: ",
+    welcome:"Добро пожаловать!",
+    admin:"Панель администратора",
+    noUsers:"Пользователи не найдены."
+  }
+};
+
+function t(key) {
+  return translations[currentLanguage][key];
+}
+
+function setMessage(text) {
+  $("message").textContent = text;
+}
+
+function updateForm() {
+  $("formTitle").textContent = t(mode);
+  $("submitButton").textContent = t(mode);
+  $("name").placeholder = t("name");
+  $("email").placeholder = t("email");
+  $("password").placeholder = t("password");
+  $("name").classList.toggle("hidden", mode === "login");
+  $("name").required = mode === "register";
+  $("switchMode").textContent =
+    mode === "register" ? t("have") : t("noAccount");
+  $("message").textContent = "";
+}
+
+$("language").addEventListener("change", e => {
+  currentLanguage = e.target.value;
+  document.documentElement.lang = currentLanguage;
+
+  document.querySelectorAll("[data-" + currentLanguage + "]")
+    .forEach(el => {
+      el.textContent = el.getAttribute("data-" + currentLanguage);
+    });
+
+  updateForm();
 });
+
+$("switchMode").addEventListener("click", () => {
+  mode = mode === "register" ? "login" : "register";
+  updateForm();
+});
+
+$("authForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const name = $("name").value.trim();
+  const email = $("email").value.trim();
+  const password = $("password").value;
+
+  if (password.length < 6) {
+    setMessage("Parol kamida 6 ta belgidan iborat bo‘lishi kerak.");
+    return;
+  }
+
+  $("submitButton").disabled = true;
+  setMessage(t("loading"));
+
+  try {
+    if (mode === "register") {
+      const result = await createUserWithEmailAndPassword(
+        auth, email, password
+      );
+
+      await setDoc(doc(db, "users", result.user.uid), {
+        name,
+        email: result.user.email,
+        createdAt: serverTimestamp()
+      });
+
+      setMessage(t("success"));
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+      setMessage(t("logged"));
+    }
+  } catch (error) {
+    console.error(error);
+    setMessage(t("error") + error.message);
+  } finally {
+    $("submitButton").disabled = false;
+  }
+});
+
+$("logoutButton").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    setMessage(t("error") + error.message);
+  }
+});
+
+async function loadAdminUsers() {
+  $("userList").textContent = t("loading");
+
+  try {
+    const snapshot = await getDocs(collection(db, "users"));
+
+    if (snapshot.empty) {
+      $("userList").textContent = t("noUsers");
+      return;
+    }
+
+    $("userList").replaceChildren();
+
+    snapshot.forEach(item => {
+      const data = item.data();
+      const row = document.createElement("div");
+      row.className = "user-row";
+
+      const name = document.createElement("strong");
+      name.textContent = data.name || "Nomsiz";
+
+      const email = document.createElement("p");
+      email.textContent = data.email || "";
+
+      row.append(name, email);
+      $("userList").appendChild(row);
+    });
+  } catch (error) {
+    console.error(error);
+    $("userList").textContent = "Ma'lumotlarni olishda xatolik: " + error.message;
+  }
+}
+
+onAuthStateChanged(auth, async user => {
+  $("authBox").classList.toggle("hidden", !!user);
+  $("userPanel").classList.toggle("hidden", !user);
+  $("adminPanel").classList.add("hidden");
+
+  if (!user) return;
+
+  $("welcome").textContent = t("welcome");
+  $("userEmail").textContent = user.email || "";
+
+  try {
+    const token = await getIdTokenResult(user, true);
+
+    if (token.claims.admin === true) {
+      $("adminPanel").classList.remove("hidden");
+      await loadAdminUsers();
+    }
+  } catch (error) {
+    console.error("Account check failed:", error);
+  }
+});
+
+updateForm();
 </script>
 </body>
 </html>

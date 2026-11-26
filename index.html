@@ -305,6 +305,10 @@ document.getElementById("serviceNotice").scrollIntoView({behavior:"smooth",block
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import {
+initializeAppCheck,
+ReCaptchaEnterpriseProvider
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app-check.js";
 import {
 getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
 signOut,onAuthStateChanged,getIdTokenResult
@@ -324,6 +328,14 @@ measurementId:"G-3CN65EMKMC"
 };
 
 const app=initializeApp(firebaseConfig);
+
+const appCheck=initializeAppCheck(app,{
+  provider:new ReCaptchaEnterpriseProvider(
+    "6Lf9sjMuAAAAAM5SorllHteiZpZKMwMbxdiLe5_4"
+  ),
+  isTokenAutoRefreshEnabled:true
+});
+
 const auth=getAuth(app);
 const db=getFirestore(app);
 let mode="register";

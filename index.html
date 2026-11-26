@@ -527,5 +527,16 @@ onAuthStateChanged(auth, async user => {
 
 updateForm();
 </script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("MK Digital Hub PWA ready"))
+      .catch((error) => console.error("PWA error:", error));
+  });
+}
+</script>
+
 </body>
 </html>

@@ -369,7 +369,35 @@ const db=getFirestore(app);
 const model=getGenerativeModel(ai,{
   model:"gemini-2.5-flash"
 });
-let mode="register";
+window.sendAIMessage = async function(){
+  const input=document.getElementById("aiChatInput");
+  const messages=document.getElementById("aiChatMessages");
+  const question=input.value.trim();
+
+  if(!question) return;
+
+  const userLine=document.createElement("p");
+  userLine.textContent="Siz: "+question;
+  messages.appendChild(userLine);
+  input.value="";
+
+  const loading=document.createElement("p");
+  loading.textContent="MK AI: Javob tayyorlanmoqda...";
+  messages.appendChild(loading);
+
+  messages.scrollTop=messages.scrollHeight;
+
+  try{
+    const result=await model.generateContent(question);
+    loading.textContent="MK AI: "+result.response.text();
+  }catch(error){
+    console.error(error);
+    loading.textContent="Xatolik: "+(error.message || "AI bilan ulanish amalga oshmadi.");
+  }
+
+  messages.scrollTop=messages.scrollHeight;
+};
+  let mode="register";
 let currentLanguage="uz";
 const $=id=>document.getElementById(id);
 

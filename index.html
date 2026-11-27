@@ -213,8 +213,13 @@ data-ru="Помощь в программировании и написании 
 <button onclick="openService('AI Coding')">Ochish</button>
 </article>
 </div>
-<div class="notice" id="serviceNotice">
-AI xizmatlari bosqichma-bosqich ishga tushiriladi.
+<div id="aiChatBox" class="card hidden" style="margin-top:20px;">
+  <h3>🤖 MK AI Chat</h3>
+  <div id="aiChatMessages" style="min-height:180px;max-height:350px;overflow-y:auto;padding:12px;margin:12px 0;background:#080d19;border-radius:12px;">
+    <p>Salom! Men MK AI yordamchisiman. Savolingizni yozing.</p>
+  </div>
+  <textarea id="aiChatInput" placeholder="Savolingizni yozing..." rows="3" style="width:100%;padding:12px;border-radius:10px;"></textarea>
+  <button onclick="sendAIMessage()" style="margin-top:10px;">Yuborish</button>
 </div>
 </section>
 

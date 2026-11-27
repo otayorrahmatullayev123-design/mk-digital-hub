@@ -219,7 +219,7 @@ data-ru="Помощь в программировании и написании 
     <p>Salom! Men MK AI yordamchisiman. Savolingizni yozing.</p>
   </div>
   <textarea id="aiChatInput" placeholder="Savolingizni yozing..." rows="3" style="width:100%;padding:12px;border-radius:10px;"></textarea>
-  <button onclick="sendAIMessage()" style="margin-top:10px;">Yuborish</button>
+<button id="sendAIButton" type="button" style="margin-top:10px;">Yuborish</button>
 </div>
 </section>
 
@@ -397,6 +397,9 @@ window.sendAIMessage = async function(){
 
   messages.scrollTop=messages.scrollHeight;
 };
+ document.getElementById("sendAIButton").addEventListener("click",()=>{
+  window.sendAIMessage();
+});
   let mode="register";
 let currentLanguage="uz";
 const $=id=>document.getElementById(id);

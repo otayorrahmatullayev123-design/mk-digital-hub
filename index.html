@@ -295,18 +295,32 @@ Maqsadimiz — bilim, texnologiya va ijodkorlikni birlashtirish.
 
 <footer>© 2026 MK Digital Hub. All rights reserved.</footer>
 
+
 <script>
 const serviceMessages={
 uz:"Bu xizmat hozircha tayyorlanmoqda. AI imkoniyatlari xavfsiz ulanishdan so‘ng ishga tushiriladi.",
 en:"This service is being prepared. AI features will launch after a secure connection is configured.",
 ru:"Этот сервис готовится к запуску. Функции ИИ будут доступны после настройки безопасного подключения."
 };
+
 function openService(name){
-const lang=document.getElementById("language").value;
-document.getElementById("serviceNotice").textContent=name+": "+serviceMessages[lang];
-document.getElementById("serviceNotice").scrollIntoView({behavior:"smooth",block:"center"});
+  const chatBox=document.getElementById("aiChatBox");
+  const notice=document.getElementById("serviceNotice");
+
+  if(name==="AI Chat"){
+    chatBox.classList.remove("hidden");
+    notice.textContent="MK AI Chat tayyor. Savolingizni yozing.";
+    chatBox.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+
+  chatBox.classList.add("hidden");
+  const lang=document.getElementById("language").value;
+  notice.textContent=name+": "+(serviceMessages[lang] || serviceMessages.uz);
+  notice.scrollIntoView({behavior:"smooth",block:"center"});
 }
 </script>
+
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";

@@ -388,7 +388,16 @@ window.sendAIMessage = async function(){
   messages.scrollTop=messages.scrollHeight;
 
   try{
-    const result=await model.generateContent(question);
+   const prompt = `
+Sen MK Digital Hub sun'iy intellekt yordamchisisan.
+Foydalanuvchiga uning savol bergan tilida javob ber.
+Agar foydalanuvchi salomlashsa, samimiy va qisqa salomlash.
+Aniq, foydali va tushunarli javob ber.
+
+Foydalanuvchi savoli: ${question}
+`;
+
+const result=await model.generateContent(prompt);
     loading.textContent="MK AI: "+result.response.text();
   }catch(error){
     console.error(error);

@@ -306,6 +306,11 @@ document.getElementById("serviceNotice").scrollIntoView({behavior:"smooth",block
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
   import {
+getAI,
+getGenerativeModel,
+GoogleAIBackend
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-ai.js";
+  import {
 initializeAppCheck,
 ReCaptchaEnterpriseProvider
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app-check.js";
@@ -338,6 +343,13 @@ const appCheck=initializeAppCheck(app,{
 
 const auth=getAuth(app);
 const db=getFirestore(app);
+  const ai=getAI(app,{
+  backend:new GoogleAIBackend()
+});
+
+const model=getGenerativeModel(ai,{
+  model:"gemini-2.5-flash"
+});
 let mode="register";
 let currentLanguage="uz";
 const $=id=>document.getElementById(id);
